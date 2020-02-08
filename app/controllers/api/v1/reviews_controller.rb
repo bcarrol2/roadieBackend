@@ -2,8 +2,7 @@ class Api::V1::ReviewsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    review = Review.all.order(created_at: :desc)
-    reviews = Review.all
+    reviews = Review.all.order(created_at: :desc)
     reviews_count = reviews.count
     average_reviews5 = reviews.where(rating: 5).count
     average_reviews4 = reviews.where(rating: 4).count
