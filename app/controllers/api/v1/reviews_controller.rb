@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-      skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   def index
     review = Review.all.order(created_at: :desc)
@@ -45,12 +45,6 @@ class Api::V1::ReviewsController < ApplicationController
     else
       render json: review.errors
     end
-  end
-
-  def star_rating(rate)
-    debugger
-    reviews = Review.all.where(rating: rate)
-    render json: reviews
   end
 
   def show
