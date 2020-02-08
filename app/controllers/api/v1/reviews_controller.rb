@@ -3,7 +3,6 @@ class Api::V1::ReviewsController < ApplicationController
 
   def index
     reviews = Review.all.order(created_at: :desc)
-    reviews_count = reviews.count
     all_reviews_rated5 = reviews.where(rating: 5)
     all_reviews_rated4 = reviews.where(rating: 4)
     all_reviews_rated3 = reviews.where(rating: 3)
@@ -11,7 +10,7 @@ class Api::V1::ReviewsController < ApplicationController
     all_reviews_rated1 = reviews.where(rating: 1)
     average_reviews = reviews.map { |r| r.rating }.sum / reviews.count
     review_data = {
-      counted_reviews: reviews_count,
+      counted_reviews: reviews.count,
       average_star_rating: average_reviews,
       rated5_count: all_reviews_rated5.count,
       rated4_count: all_reviews_rated4.count,
