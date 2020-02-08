@@ -4,30 +4,25 @@ class Api::V1::ReviewsController < ApplicationController
   def index
     reviews = Review.all.order(created_at: :desc)
     reviews_count = reviews.count
-    average_reviews5 = reviews.where(rating: 5).count
-    average_reviews4 = reviews.where(rating: 4).count
-    average_reviews3 = reviews.where(rating: 3).count
-    average_reviews2 = reviews.where(rating: 2).count
-    average_reviews1 = reviews.where(rating: 1).count
-    average_rating5 = reviews.where(rating: 5)
-    average_rating4 = reviews.where(rating: 4)
-    average_rating3 = reviews.where(rating: 3)
-    average_rating2 = reviews.where(rating: 2)
-    average_rating1 = reviews.where(rating: 1)
+    all_reviews_rated5 = reviews.where(rating: 5)
+    all_reviews_rated4 = reviews.where(rating: 4)
+    all_reviews_rated3 = reviews.where(rating: 3)
+    all_reviews_rated2 = reviews.where(rating: 2)
+    all_reviews_rated1 = reviews.where(rating: 1)
     average_reviews = reviews.map { |r| r.rating }.sum / reviews.count
     review_data = {
       counted_reviews: reviews_count,
       average_star_rating: average_reviews,
-      rev5: average_reviews5,
-      rev4: average_reviews4,
-      rev3: average_reviews3,
-      rev2: average_reviews2,
-      rev1: average_reviews1,
-      rating5: average_rating5,
-      rating4: average_rating4,
-      rating3: average_rating3,
-      rating2: average_rating2,
-      rating1: average_rating1,
+      rated5_count: all_reviews_rated5.count,
+      rated4_count: all_reviews_rated4.count,
+      rated3_count: all_reviews_rated3.count,
+      rated2_count: all_reviews_rated2.count,
+      rated1_count: all_reviews_rated1.count,
+      rating5: all_reviews_rated5,
+      rating4: all_reviews_rated4,
+      rating3: all_reviews_rated3,
+      rating2: all_reviews_rated2,
+      rating1: all_reviews_rated1,
     }
     render json: review_data
   end
